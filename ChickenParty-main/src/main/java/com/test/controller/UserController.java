@@ -1,6 +1,10 @@
 package com.test.controller;
 
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +30,11 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String welcomePage(ModelMap model, UserDto dto) {
+	public String welcomePage(ModelMap model, UserDto dto, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+		
+		session = request.getSession();
+		session.setAttribute("userId", dto.getUserId());
+		session.setAttribute("userPw", dto.getUserPw());
 		if(dto.getUserId().equals("admin")&&dto.getUserPw().equals("1234")) {
 			return "redirect:welcome?userId=admin&userNm=storeA";
 		}
@@ -39,6 +47,7 @@ public class UserController {
 			return "redirect:welcomechain?userId=" +dto.getUserId() + "&userNm=" + test.getUserNm();
 	      }
 		model.put("errorMsg", "Please provide the correct userid and userpw");
+		
 		
 		return "login";
 	}
