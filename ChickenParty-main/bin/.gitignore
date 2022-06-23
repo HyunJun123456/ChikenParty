@@ -1,0 +1,17 @@
+application.properties
+.mvn
+.settings
+target
+target/*
+target/**
+.classpath
+.project
+HELP.md
+mvnw
+mvnw.cmd
+/.metadata/
+Servers
+<<<<<<< HEAD
+.springBeans
+=======
+>>>>>>> 7fdf4dabfad3bd9ce695211c168e6736f8030e0b
